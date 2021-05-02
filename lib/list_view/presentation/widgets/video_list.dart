@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_video_app/list_view/domain/entities/video_entity.dart';
 import 'package:my_video_app/list_view/domain/entities/videos_data_entity.dart';
+import 'package:my_video_app/list_view/presentation/bloc/list_view_bloc.dart';
 import 'package:my_video_app/list_view/presentation/widgets/video_tail.dart';
 
 class VideoList extends StatelessWidget {
