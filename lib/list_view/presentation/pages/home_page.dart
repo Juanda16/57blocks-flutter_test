@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_video_app/injection_container.dart';
 import 'package:my_video_app/list_view/presentation/bloc/list_view_bloc.dart';
+import 'package:my_video_app/list_view/presentation/pages/video_detail_page.dart';
 import 'package:my_video_app/list_view/presentation/widgets/loading_widget.dart';
 import 'package:my_video_app/list_view/presentation/widgets/message_display.dart';
 import 'package:my_video_app/list_view/presentation/widgets/video_list.dart';
@@ -9,12 +10,14 @@ import 'package:my_video_app/list_view/presentation/widgets/video_list.dart';
 class HomePage extends StatelessWidget {
   static const String id = 'home_page';
 
-  void _onItemTappedPage(int index) {
+  void _onItemTappedPage(int index, context) {
     switch (index) {
       case 0:
-        print(index);
+        HomePage();
         break;
       case 1:
+        Navigator.pushNamed(context, VideoDetailPage.id);
+
         print(index);
         break;
       case 2:
@@ -104,7 +107,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                   currentIndex: _selectedIndex,
-                  onTap: _onItemTappedPage,
+                  //onTap: _onItemTappedPage(_selectedIndex,context),
                 )
               ],
             ),

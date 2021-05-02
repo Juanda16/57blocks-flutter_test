@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_video_app/list_view/domain/entities/video_entity.dart';
 import 'package:my_video_app/list_view/domain/entities/videos_data_entity.dart';
+import 'package:my_video_app/list_view/presentation/widgets/video_tail.dart';
 
 class VideoList extends StatelessWidget {
   final VideosDataEntity videosList;
@@ -22,24 +24,7 @@ class VideoList extends StatelessWidget {
               // height: 50,
               // color: Colors.amber[colorCodes[index]],
               // child: Center(child: Text('Entry ${entries[index]}')),
-              child: Card(
-                child: Column(
-                  children: [
-                    Container(
-                      // Third of the size of the screen
-                      height: MediaQuery.of(context).size.height / 4,
-                      // Message Text widgets / CircularLoadingIndicator
-                      child: Image.network(video.thumbnailsUrl),
-                    ),
-                    ListTile(
-                      leading:
-                          Image.asset('images/video-thumbnail-default.png'),
-                      title: Text(video.id),
-                      subtitle: Text(video.title),
-                    ),
-                  ],
-                ),
-              ),
+              child: VideoTile(video: video),
             );
           }),
     );
