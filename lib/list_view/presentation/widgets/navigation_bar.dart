@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:my_video_app/list_view/presentation/pages/explore_page.dart';
 import 'package:my_video_app/list_view/presentation/pages/home_page.dart';
-import 'package:my_video_app/list_view/presentation/pages/video_detail_page.dart';
+import 'package:my_video_app/list_view/presentation/pages/library_page.dart';
+import 'package:my_video_app/list_view/presentation/pages/subscription_page.dart';
 
 class NavigationBar extends StatelessWidget {
-  int _selectedIndex = 0;
+  final int _selectedIndex = 0;
   NavigationBar({
     Key? key,
   }) : super(key: key);
@@ -45,23 +47,25 @@ class NavigationBar extends StatelessWidget {
   void _onItemTappedPage(int index, context) {
     switch (index) {
       case 0:
-        Navigator.pushNamed(context, HomePage.id);
+        Navigator.popUntil(context, ModalRoute.withName(HomePage.id));
+        //Navigator.pushNamed(context, HomePage.id);
         break;
       case 1:
-        //Navigator.pushNamed(context, VideoDetailPage.id);
+        Navigator.pushNamed(context, ExplorePage.id);
         print(index);
         break;
       case 2:
         print(index);
         break;
       case 3:
-        print(index);
+        Navigator.pushNamed(context, SubscriptionPage.id);
         break;
       case 4:
-        print(index);
+        Navigator.pushNamed(context, LibraryPage.id);
         break;
       default:
-        print(index);
+        print('Error Button bar index: $index is the default option');
+        Navigator.popUntil(context, ModalRoute.withName(HomePage.id));
         break;
     }
   }

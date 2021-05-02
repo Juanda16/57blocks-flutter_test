@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_video_app/list_view/domain/entities/video_entity.dart';
+import 'package:my_video_app/list_view/presentation/pages/explore_page.dart';
 import 'package:my_video_app/list_view/presentation/pages/home_page.dart';
 import 'injection_container.dart';
+import 'list_view/presentation/pages/library_page.dart';
+import 'list_view/presentation/pages/subscription_page.dart';
 import 'list_view/presentation/pages/video_detail_page.dart';
 
 void main() async {
@@ -17,12 +20,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My video app',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.pink,
+          primaryColorLight: Colors.pink,
+          primaryColorDark: Colors.white24,
+          secondaryHeaderColor: Colors.white),
       initialRoute: HomePage.id,
       routes: {
         HomePage.id: (context) => HomePage(),
         VideoDetailPage.id: (context) => VideoDetailPage(),
+        ExplorePage.id: (context) => ExplorePage(),
+        SubscriptionPage.id: (context) => SubscriptionPage(),
+        LibraryPage.id: (context) => LibraryPage(),
+
         //),
         //        video: VideoEntity,
       },

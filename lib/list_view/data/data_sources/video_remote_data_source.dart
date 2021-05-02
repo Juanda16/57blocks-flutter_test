@@ -32,26 +32,49 @@ class VideoRemoteDataSourceImpl implements VideoRemoteDataSource {
     List<VideoEntity> videos = [];
     videos.add(VideoEntity(
       id: '1',
-      title: 'first video',
-      description: '',
+      title: 'Mix - Melendi - Destino o casualidad',
+      description: 'Medelendi - Sebastian Yatra',
       duration: '3:01',
-      thumbnailsUrl:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGPaBo-woSR4_radfgJt1FquaDHQly64mHBw&usqp=CAU',
+      channelTitle: 'MyMusic',
+      thumbnailsUrl: 'https://i.ytimg.com/vi/D9W4DLjmoOM/maxresdefault.jpg',
     ));
     videos.add(VideoEntity(
-      id: '2',
-      title: 'Second video',
-      description: '',
-      duration: '3:01',
-      thumbnailsUrl: 'https://i.ytimg.com/vi/KaCxvrcPoDU/maxresdefault.jpg',
-    ));
+        id: '2',
+        title: 'WEBINAR - Programmatic Trading in Java',
+        description: 'For traders today, Python is the most',
+        duration: '10:01',
+        channelTitle: 'Java',
+        thumbnailsUrl: 'http://i3.ytimg.com/vi/KEwdeCllNKI/hqdefault.jpg'));
     videos.add(VideoEntity(
         id: '3',
-        title: 'third video',
-        description: '',
+        title: 'LimitedBox (Flutter Widget)',
+        description: 'LimitedBox (Flutter Widget)',
+        channelTitle: 'Flutter',
         duration: '3:01',
-        thumbnailsUrl:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJSkyMUGN5Pt4bk4i55fYs7alvtIhdPHryOA&usqp=CAU'));
+        thumbnailsUrl: 'http://i3.ytimg.com/vi/uVki2CIzBTs/hqdefault.jpg'));
+    videos.add(VideoEntity(
+      id: '4',
+      title: 'Mix - Melendi - Destino o casualidad',
+      description: 'Medelendi - Sebastian Yatra',
+      duration: '3:01',
+      channelTitle: 'MyMusic',
+      thumbnailsUrl: 'https://i.ytimg.com/vi/D9W4DLjmoOM/maxresdefault.jpg',
+    ));
+    videos.add(VideoEntity(
+      id: '5',
+      title: 'WEBINAR - Programmatic Trading in',
+      description: 'For traders today, Python is the most',
+      duration: '10:01',
+      channelTitle: 'Java',
+      thumbnailsUrl: 'http://i3.ytimg.com/vi/KEwdeCllNKI/hqdefault.jpg',
+    ));
+    videos.add(VideoEntity(
+        id: '6',
+        title: 'LimitedBox (Flutter Widget)',
+        description: 'LimitedBox (Flutter Widget)',
+        channelTitle: 'Flutter',
+        duration: '3:01',
+        thumbnailsUrl: 'http://i3.ytimg.com/vi/uVki2CIzBTs/hqdefault.jpg'));
 
     VideoModel? fakeVideos = VideoModel(videos: videos);
     return Future.value(fakeVideos);

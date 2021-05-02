@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_video_app/list_view/domain/entities/video_entity.dart';
+import 'package:my_video_app/list_view/presentation/widgets/my_app_bar.dart';
 import 'package:my_video_app/list_view/presentation/widgets/navigation_bar.dart';
 import 'package:my_video_app/list_view/presentation/widgets/video_tail.dart';
 
@@ -14,43 +15,34 @@ class VideoDetailPage extends StatelessWidget {
         ModalRoute.of(context)!.settings.arguments as ScreenArguments;
     final video = args.videoDetail;
     return SafeArea(
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 10, bottom: 10),
-          child: Column(
-            children: [
-              Expanded(
-                child: Container(
-                  child: Column(
-                    children: [
-                      Card(
-                        child: Column(
-                          children: [
-                            Container(
-                              // Third of the size of the screen
-                              height: MediaQuery.of(context).size.height / 4,
-                              // Message Text widgets / CircularLoadingIndicator
-                              child: Image.network(video.thumbnailsUrl),
-                            ),
-                            ListTile(
-                              leading: Image.asset(
-                                  'images/video-thumbnail-default.png'),
-                              title: Text(video.id),
-                              subtitle: Text(video.title),
-                            ),
-                          ],
+      child: Scaffold(
+        appBar: buildAppBar(),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10, bottom: 10),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Dismissible(
+                            //Working
+                            key: Key('1'),
+                            direction: DismissDirection.down,
+                            onDismissed: (_) => Navigator.pop(context),
+                            child: VideoTile(video: video)),
+                        SizedBox(
+                          height: 10,
                         ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      //VideoTile(video: video)
-                    ],
+                        //VideoTile(video: video)
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              NavigationBar(),
-            ],
+                NavigationBar(),
+              ],
+            ),
           ),
         ),
       ),
@@ -62,3 +54,14 @@ class ScreenArguments {
   final VideoEntity videoDetail;
   ScreenArguments({required this.videoDetail});
 }
+
+// Dismissible( //Working
+// key: Key('1'),
+// direction: DismissDirection.down,
+// onDismissed: (_) => Navigator.pop(context),
+// child: VideoTile(video: video)),
+
+// DraggableScrollableSheet(builder: (BuildContext context,
+//     ScrollController scrollController) {
+// return VideoTile(video: video);
+// })

@@ -46,13 +46,5 @@ class VideoRepositoryImpl implements VideoRepository {
       }
     } else
       return Left(ServerFailure());
-    // } else {
-    //   try {
-    //     final localNumber = await localDataSource.getLastNumber();
-    //     return Right(localNumber);
-    //   } on CacheException {
-    //     return Left(CacheFailure());
-    //   }
-    // }
   }
 }
