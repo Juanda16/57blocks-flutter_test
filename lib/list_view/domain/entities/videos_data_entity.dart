@@ -7,6 +7,5 @@ class VideosDataEntity extends Equatable {
   VideosDataEntity({required this.videos});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [videos];
 }

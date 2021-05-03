@@ -14,6 +14,7 @@ class ExplorePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              //Todo: Fake image w/ lack of implementation
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(

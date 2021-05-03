@@ -31,7 +31,6 @@ class MyApp extends StatelessWidget {
         SubscriptionPage.id: (context) => SubscriptionPage(),
         LibraryPage.id: (context) => LibraryPage(),
 
-        //),
         //        video: VideoEntity,
       },
     );

@@ -11,21 +11,6 @@ abstract class VideoRemoteDataSource {
 
 class VideoRemoteDataSourceImpl implements VideoRemoteDataSource {
   VideoRemoteDataSourceImpl();
-  // static String key = 'YOUR_API_KEY';
-  // YoutubeAPI ytApi = new YoutubeAPI(key);
-  // List<YT_API> ytResult = [];
-
-  // @override
-  // Future<VideoModel> getSpecificVideo() async {
-  //   final query = 'flutter';
-  //   ytResult = await ytApi.search(query);
-  // }
-  //
-  // @override
-  // Future<VideoModel> getTrendingVideos() async {
-  //   const regionCode = 'CO';
-  //   ytResult = await ytApi.getTrends(regionCode: regionCode);
-  // }
 
   @override
   Future<VideoModel> getFakeVideos() {
@@ -82,40 +67,13 @@ class VideoRemoteDataSourceImpl implements VideoRemoteDataSource {
 
   @override
   Future<VideoModel> getSpecificVideo() {
-    // TODO: implement getSpecificVideo
+    // TODO: implement getSpecificVideo from real repository
     throw UnimplementedError();
   }
 
   @override
   Future<VideoModel> getTrendingVideos() {
-    // TODO: implement getTrendingVideos
+    // TODO: implement getTrendingVideos from real repository
     throw UnimplementedError();
   }
 }
-
-// = [
-// VideoEntity(
-// id: '1',
-// title: 'first video',
-// description: '',
-// duration: '3:01',
-// ),
-// VideoEntity(
-// id: '2',
-// title: 'Second video',
-// description: '',
-// duration: '3:01',
-// ),
-// VideoEntity(
-// id: '3',
-// title: 'third video',
-// description: '',
-// duration: '3:01',
-// ),
-// VideoEntity(
-// id: ' 4',
-// title: 'fourth video',
-// description: '',
-// duration: '3:01',
-// ),
-// ];

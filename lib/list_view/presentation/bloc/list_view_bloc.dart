@@ -38,22 +38,6 @@ class ListViewBloc extends Bloc<ListViewEvent, ListViewState> {
       print('getting data');
       yield* _eitherLoadedOrErrorState(failureOrList);
     }
-    // {
-    //   //final inputEither = inputConverter.stringToInteger(event.stringNumber);
-    //   final failureOrList = getTrendingVideos(NoParams);
-    //   yield* failureOrList.fold(
-    //     (failure) async* {
-    //       yield Error(message: INVALID_INPUT_FAILURE_MESSAGE);
-    //     },
-    //     (integer) async* {
-    //       yield Loading();
-    //       final failureOrNumber =
-    //           await addConcreteNumber(Params(number: integer));
-    //
-    //       yield* _eitherLoadedOrErrorState(failureOrNumber);
-    //     },
-    //   );
-    // }
   }
 
   Stream<ListViewState> _eitherLoadedOrErrorState(
