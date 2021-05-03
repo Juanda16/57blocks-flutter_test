@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_video_app/injection_container.dart';
+import 'package:my_video_app/list_view/domain/entities/video_entity.dart';
+import 'package:my_video_app/list_view/domain/entities/videos_data_entity.dart';
 import 'package:my_video_app/list_view/presentation/bloc/list_view_bloc.dart';
 import 'package:my_video_app/list_view/presentation/pages/video_detail_page.dart';
+import 'package:my_video_app/list_view/presentation/widgets/floating_bar.dart';
 import 'package:my_video_app/list_view/presentation/widgets/loading_widget.dart';
 import 'package:my_video_app/list_view/presentation/widgets/message_display.dart';
 import 'package:my_video_app/list_view/presentation/widgets/my_app_bar.dart';
@@ -21,117 +24,49 @@ class HomePage extends StatelessWidget {
   }
 
   BlocProvider<ListViewBloc> buildBody(BuildContext context) {
+    bool isPlaying = false;
+    VideosDataEntity currentList;
+
     return BlocProvider(
       create: (context) => sl<ListViewBloc>(),
       child: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 1),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Expanded(
-                child: Container(
-                  child: BlocBuilder<ListViewBloc, ListViewState>(
-                      builder: (context, state) {
-                    if (state is Empty) {
-                      print('empty sate');
-                      BlocProvider.of<ListViewBloc>(context)
-                          .add(GetTrendingVideosEvent());
-                      return LoadingWidget();
-                    } else if (state is Loading) {
-                      print('Loading sate');
-                      //BlocProvider.of<ListViewBloc>(context).add(GetTrendingVideosEvent());
-                      return LoadingWidget();
-                    } else if (state is Loaded) {
-                      print('Loaded State');
-                      return VideoList(
-                        videosList: state.listView,
-                      );
-                    } else if (state is Playing) {
-                      return FloatingBar(
-                        isVisible: state.isPlaying,
-                        title: 'is playing',
-                      );
-                    } else if (state is Error) {
-                      return MessageDisplay(text: state.message);
-                    } else {
-                      return MessageDisplay(text: 'error');
-                    }
-                  }),
-                ),
-              ),
-              // FloatingBar(
-              //   title: 'this tittle',
-              //   isVisible: true,
-              // ),
-              NavigationBar(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class FloatingBar extends StatelessWidget {
-  final String title;
-  final bool isVisible;
-  const FloatingBar({
-    Key? key,
-    this.isVisible = false,
-    required this.title,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Visibility(
-      visible: isVisible,
-      child: FloatingActionButton(
-        //foregroundColor: Colors.grey.shade200,
-        backgroundColor: Colors.grey.shade400,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            SizedBox(
-              width: 30,
-            ),
-            Icon(
-              Icons.pause,
-              size: 30,
-              color: Colors.white,
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
+            Expanded(
+              child: Container(
+                child: BlocBuilder<ListViewBloc, ListViewState>(
+                    builder: (context, state) {
+                  if (state is Empty) {
+                    print('empty sate');
+                    BlocProvider.of<ListViewBloc>(context)
+                        .add(GetTrendingVideosEvent());
+                    return LoadingWidget();
+                  } else if (state is Loading) {
+                    print('Loading sate');
+                    return LoadingWidget();
+                  } else if (state is Loaded) {
+                    print('Loaded State');
+                    currentList = state.listView;
+                    return VideoList(
+                      videosList: currentList,
+                    );
+                  } else if (state is Error) {
+                    return MessageDisplay(text: state.message);
+                  } else {
+                    return MessageDisplay(text: 'error');
+                  }
+                }),
               ),
             ),
-            SizedBox(
-              width: 20,
+            FloatingBar(
+              title: 'this tittle',
+              isVisible: isPlaying,
             ),
-            Icon(
-              Icons.close,
-              size: 40,
-              color: Colors.white,
-            ),
-            SizedBox(
-              width: 20,
-            ),
+            NavigationBar(),
           ],
         ),
-        shape: RoundedRectangleBorder(),
-        onPressed: () {},
       ),
     );
   }

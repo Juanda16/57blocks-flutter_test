@@ -34,6 +34,7 @@ class ListViewBloc extends Bloc<ListViewEvent, ListViewState> {
       yield Playing(true);
     }
     if (event is GetTrendingVideosEvent) {
+      yield Loading();
       final failureOrList = await getTrendingVideos(NoParams());
       print('getting data');
       yield* _eitherLoadedOrErrorState(failureOrList);

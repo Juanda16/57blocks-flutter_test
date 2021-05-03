@@ -35,7 +35,7 @@ class VideoDetailPage extends StatelessWidget {
                     direction: DismissDirection.down,
                     onDismissed: (_) {
                       //BlocProvider.of<ListViewBloc>(context).add(PlayingVideoEvent());
-                      return Navigator.pop(context);
+                      return Navigator.pop(context, video.title);
                     },
                     child: VideoTile(video: video),
                   ),

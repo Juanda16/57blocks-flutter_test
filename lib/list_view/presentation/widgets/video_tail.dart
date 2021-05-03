@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:like_button/like_button.dart';
-import 'package:my_video_app/core/error/exceptions.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_video_app/list_view/domain/entities/video_entity.dart';
 import 'package:my_video_app/list_view/presentation/bloc/list_view_bloc.dart';
 import 'package:my_video_app/list_view/presentation/pages/video_detail_page.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_video_app/list_view/presentation/widgets/floating_bar.dart';
+
+import 'get_image.dart';
 
 class VideoTile extends StatefulWidget {
   const VideoTile({
@@ -23,108 +24,65 @@ class _VideoTileState extends State<VideoTile> {
   Widget build(BuildContext context) {
     //bool like = widget.video.like;
     return Card(
-      elevation: 10.0,
+      elevation: 15.0,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, VideoDetailPage.id,
+            onTap: () async {
+              final result = await Navigator.pushNamed(
+                  context, VideoDetailPage.id,
                   arguments: ScreenArguments(videoDetail: widget.video));
+              //BlocProvider.of<ListViewBloc>(context).add(PlayingVideoEvent());
+
+              ScaffoldMessenger.of(context)
+                ..removeCurrentSnackBar()
+                ..showSnackBar(SnackBar(
+                  content: Text("$result playing"),
+                ));
             },
             child: Container(
               height: MediaQuery.of(context).size.height / 4,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: getImage(),
+                  image: getImage(widget.video.thumbnailsUrl),
                 ),
               ),
-
-              //child: Image.asset('images/video-thumbnail-default.png'),
             ),
           ),
-          ListTile(
-            //leading: Image.asset('images/video-thumbnail-default.png'),
-            title: Text(widget.video.title),
-            subtitle: Text(widget.video.channelTitle),
-            trailing: Column(
-              children: [
-                Container(
-                  child: IconButton(
-                    icon: Icon(
-                      widget.video.like
-                          ? Icons.favorite
-                          : Icons.favorite_border,
-                      color: widget.video.like ? Colors.red : null,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        widget.video.like = !widget.video.like;
-                        // BlocProvider.of<ListViewBloc>(context)
-                        //     .add(GetTrendingVideosEvent());
-                      });
-                    },
-                  ),
-                )
-              ],
-            ),
-          ),
+          buildListTile(),
         ],
       ),
     );
   }
 
-  ImageProvider getImage() {
-    try {
-      return NetworkImage(widget.video.thumbnailsUrl);
-    } catch (exception) {
-      print(exception);
-      return AssetImage('images/video-thumbnail-default.png');
-    }
+  ListTile buildListTile() {
+    return ListTile(
+      //leading: Image.asset('images/video-thumbnail-default.png'),
+      title: Text(widget.video.title),
+      subtitle: Text(widget.video.channelTitle),
+      trailing: Column(
+        children: [
+          Container(
+            child: IconButton(
+              //TODO: Get the like status from database depends on userAccount
+              icon: Icon(
+                widget.video.like ? Icons.favorite : Icons.favorite_border,
+                color: widget.video.like ? Colors.red : null,
+              ),
+              onPressed: () {
+                setState(() {
+                  widget.video.like = !widget.video.like;
+                  // BlocProvider.of<ListViewBloc>(context)
+                  //     .add(GetTrendingVideosEvent());
+                });
+              },
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
-// return GestureDetector(
-// onTap: () {
-// Navigator.pushNamed(context, VideoDetailPage.id);
-// },
-
-// trailing: GestureDetector(
-//   child: Icon(
-//     // NEW from here...
-//     like ? Icons.favorite : Icons.favorite_border,
-//     color: like ? Colors.red : null,
-//   ),
-//   onTap: () {
-//     // setState(() {
-//     //   if (like) {
-//     //     print('tapping');
-//     //     like = false;
-//     //   } else {
-//     //     like = true;
-//     //   }
-//     });
-//},
-
-// onTap: () => Navigator.push(
-//     context,
-//     MaterialPageRoute(
-//         builder: (context) => VideoDetailPage(
-//               video: video,
-//             ))),
-// trailing: Icon(
-//   like ? Icons.favorite : Icons.favorite_border,
-//   color: like ? Colors.red : null,
-// ),
-
-// Expanded(
-// child: Container(
-// decoration: BoxDecoration(
-// image: DecorationImage(
-// fit: BoxFit.fill,
-// image: AssetImage('images/subscriptions.jpeg'),
-// ),
-// ),
-// ),
-// ),
