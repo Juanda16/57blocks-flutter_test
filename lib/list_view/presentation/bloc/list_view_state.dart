@@ -19,6 +19,15 @@ class Loaded extends ListViewState {
   List<Object> get props => [listView];
 }
 
+class Playing extends ListViewState {
+  final bool isPlaying;
+
+  Playing(this.isPlaying);
+
+  @override
+  List<Object> get props => [isPlaying];
+}
+
 class Error extends ListViewState {
   final String message;
 

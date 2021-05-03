@@ -20,8 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'My video app',
       theme: ThemeData(
-          primarySwatch: Colors.pink,
-          primaryColorLight: Colors.pink,
+          primarySwatch: Colors.blueGrey,
           primaryColorDark: Colors.white24,
           secondaryHeaderColor: Colors.white),
       initialRoute: HomePage.id,

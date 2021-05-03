@@ -10,13 +10,19 @@ class SubscriptionPage extends StatelessWidget {
       child: Scaffold(
         appBar: buildAppBar(),
         body: Container(
-          margin: EdgeInsets.only(
-            top: 5,
-          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Container(),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: AssetImage('images/subscriptions.jpeg'),
+                    ),
+                  ),
+                ),
+              ),
               NavigationBar(),
             ],
           ),

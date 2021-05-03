@@ -23,6 +23,7 @@ class _VideoTileState extends State<VideoTile> {
   Widget build(BuildContext context) {
     //bool like = widget.video.like;
     return Card(
+      elevation: 10.0,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -33,10 +34,14 @@ class _VideoTileState extends State<VideoTile> {
                   arguments: ScreenArguments(videoDetail: widget.video));
             },
             child: Container(
-              // Third of the size of the screen
               height: MediaQuery.of(context).size.height / 4,
-              // Message Text widgets / CircularLoadingIndicator
-              child: getImage(),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: getImage(),
+                ),
+              ),
+
               //child: Image.asset('images/video-thumbnail-default.png'),
             ),
           ),
@@ -44,8 +49,6 @@ class _VideoTileState extends State<VideoTile> {
             //leading: Image.asset('images/video-thumbnail-default.png'),
             title: Text(widget.video.title),
             subtitle: Text(widget.video.channelTitle),
-
-            //trailing: LikeButton(),
             trailing: Column(
               children: [
                 Container(
@@ -73,12 +76,12 @@ class _VideoTileState extends State<VideoTile> {
     );
   }
 
-  Image getImage() {
+  ImageProvider getImage() {
     try {
-      return Image.network(widget.video.thumbnailsUrl);
+      return NetworkImage(widget.video.thumbnailsUrl);
     } catch (exception) {
       print(exception);
-      return Image.asset('images/video-thumbnail-default.png');
+      return AssetImage('images/video-thumbnail-default.png');
     }
   }
 }
@@ -113,4 +116,15 @@ class _VideoTileState extends State<VideoTile> {
 // trailing: Icon(
 //   like ? Icons.favorite : Icons.favorite_border,
 //   color: like ? Colors.red : null,
+// ),
+
+// Expanded(
+// child: Container(
+// decoration: BoxDecoration(
+// image: DecorationImage(
+// fit: BoxFit.fill,
+// image: AssetImage('images/subscriptions.jpeg'),
+// ),
+// ),
+// ),
 // ),

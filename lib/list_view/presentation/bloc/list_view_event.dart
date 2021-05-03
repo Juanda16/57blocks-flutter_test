@@ -9,3 +9,7 @@ abstract class ListViewEvent extends Equatable {
 class GetTrendingVideosEvent extends ListViewEvent {
   GetTrendingVideosEvent();
 }
+
+class PlayingVideoEvent extends ListViewEvent {
+  PlayingVideoEvent();
+}

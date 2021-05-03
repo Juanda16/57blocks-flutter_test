@@ -11,20 +11,16 @@ class VideoList extends StatelessWidget {
     required this.videosList,
   }) : super(key: key);
 
-  //final List<String> entries;
-
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
-          padding: EdgeInsets.only(top: 8, bottom: 8),
+          padding: EdgeInsets.only(top: 2, bottom: 8),
           itemCount: videosList.videos.length,
           itemBuilder: (context, index) {
             final video = videosList.videos[index];
             return Container(
-              // height: 50,
-              // color: Colors.amber[colorCodes[index]],
-              // child: Center(child: Text('Entry ${entries[index]}')),
+              color: Colors.white24,
               child: VideoTile(video: video),
             );
           }),

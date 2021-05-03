@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
       create: (context) => sl<ListViewBloc>(),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top: 10, bottom: 10),
+          padding: const EdgeInsets.only(top: 1),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.end,
@@ -48,6 +48,11 @@ class HomePage extends StatelessWidget {
                       return VideoList(
                         videosList: state.listView,
                       );
+                    } else if (state is Playing) {
+                      return FloatingBar(
+                        isVisible: state.isPlaying,
+                        title: 'is playing',
+                      );
                     } else if (state is Error) {
                       return MessageDisplay(text: state.message);
                     } else {
@@ -56,6 +61,10 @@ class HomePage extends StatelessWidget {
                   }),
                 ),
               ),
+              // FloatingBar(
+              //   title: 'this tittle',
+              //   isVisible: true,
+              // ),
               NavigationBar(),
             ],
           ),
@@ -65,9 +74,65 @@ class HomePage extends StatelessWidget {
   }
 }
 
-// child: Container(
-// child: Padding(
-// padding: const EdgeInsets.only(top: 10, bottom: 10),
-// child: VideoList(entries: entries),
-// ),
-// )
+class FloatingBar extends StatelessWidget {
+  final String title;
+  final bool isVisible;
+  const FloatingBar({
+    Key? key,
+    this.isVisible = false,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+      visible: isVisible,
+      child: FloatingActionButton(
+        //foregroundColor: Colors.grey.shade200,
+        backgroundColor: Colors.grey.shade400,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+              width: 30,
+            ),
+            Icon(
+              Icons.pause,
+              size: 30,
+              color: Colors.white,
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            Icon(
+              Icons.close,
+              size: 40,
+              color: Colors.white,
+            ),
+            SizedBox(
+              width: 20,
+            ),
+          ],
+        ),
+        shape: RoundedRectangleBorder(),
+        onPressed: () {},
+      ),
+    );
+  }
+}

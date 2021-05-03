@@ -20,6 +20,7 @@ const String INVALID_INPUT_FAILURE_MESSAGE =
 
 class ListViewBloc extends Bloc<ListViewEvent, ListViewState> {
   final GetTrendingVideos getTrendingVideos;
+
   //final GetVideo getVideo;
   //final LikeVIdeo likeVideo;
 
@@ -29,6 +30,9 @@ class ListViewBloc extends Bloc<ListViewEvent, ListViewState> {
   Stream<ListViewState> mapEventToState(
     ListViewEvent event,
   ) async* {
+    if (event is PlayingVideoEvent) {
+      yield Playing(true);
+    }
     if (event is GetTrendingVideosEvent) {
       final failureOrList = await getTrendingVideos(NoParams());
       print('getting data');
